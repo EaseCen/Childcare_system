@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定映射到dao层 -->
+<mapper namespace="com.aaa.mapper.PostsDaoMapper">
+
+	<!-- 查询单条数据，类型int返回posts类型 -->
+	<select id="findOne" parameterType="int" resultType="posts">
+		select * from posts where id=#{id}
+	</select>
+
+	<!-- 查询所有数据时间降序 -->
+	<select id="findAll" resultType="posts">
+		select * from posts order by time desc
+	</select>
+
+	<!-- 增加数据 -->
+	<insert id="add" parameterType="posts">
+		insert into posts
+		values(default,#{name},#{text},#{time},#{author})
+	</insert>
+
+	<!-- 更新数据-通过id -->
+	<update id="upd" parameterType="posts">
+		update posts set
+		name=#{name},text=#{text},time=#{time},author=#{author}
+		where id =#{id}
+	</update>
+
+	<!-- 删除数据-通过id -->
+	<delete id="del" parameterType="int">
+		delete from posts where id=#{id}
+	</delete>
+</mapper>
